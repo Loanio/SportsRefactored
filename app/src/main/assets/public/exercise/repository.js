@@ -122,6 +122,104 @@ export class ExerciseRepository {
     return delay({ judgeClientId: false });
   }
 
+  async getStatus() {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.get("/tyapi/mobile/exerciseRecord/getStatus"));
+    }
+    return delay({ statusCode: 1, obj: [{ id: "normal", name: "正常" }, { id: "appeal", name: "申诉中" }] });
+  }
+
+  async getAllMessage(payload) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/exerciseRecord/getAllMessage", payload));
+    }
+    return delay({ statusCode: 1, obj: [{ source: "通知公告", content: "课外锻炼模拟消息" }] });
+  }
+
+  async getHistoryList(userId) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/exerciseRecord/getHistoryList", { userId }));
+    }
+    return delay({ statusCode: 1, obj: this.read(ExerciseKind.RUN).concat(this.read(ExerciseKind.OTHER)) });
+  }
+
+  async getTimeSummary(userId, eventId, termId) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/exerciseRecord/getTimeSummary", { userId, eventId, termId }));
+    }
+    return delay({ statusCode: 1, obj: { timeList: ["周一", "周二", "周三"], dataList: [1, 0, 2] } });
+  }
+
+  async getRunCountNum(payload) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/exerciseRecord/getRunCountNum", payload));
+    }
+    return delay({ statusCode: 1, obj: { count: this.read(ExerciseKind.RUN).length } });
+  }
+
+  async getPolygonsMarker(payload) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/exerciseRecord/getPolygonsMarker", payload));
+    }
+    return delay({ statusCode: 1, obj: { points: [], center: "121.4700,31.2300" } });
+  }
+
+  async getRunPolygonsMarker(payload) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/run/getPolygonsMarker", payload));
+    }
+    return delay({ statusCode: 1, obj: { points: [], center: "121.4700,31.2300" } });
+  }
+
+  async getCheckPoint(payload) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/run/getCheckPoint", payload));
+    }
+    return delay({ statusCode: 1, obj: [] });
+  }
+
+  async getRunRecordInfo(exerciseRecordId) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/exerciseRecord/getRunRecordInfo", { exerciseRecordId }));
+    }
+    return delay({ statusCode: 1, obj: null });
+  }
+
+  async getRunViolations(exerciseRecordId) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/exerciseRecord/getRunViolationsV1_2_16", { exerciseRecordId }));
+    }
+    return delay({ statusCode: 1, obj: [] });
+  }
+
+  async judgeUploaded(payload) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/exerciseRecord/judgeUploaded", payload));
+    }
+    return delay({ statusCode: 1, obj: { isdel: false } });
+  }
+
+  async judgeLocalUploaded(payload) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/exerciseRecord/judgeLocalUploaded", payload));
+    }
+    return delay({ statusCode: 1, obj: { isdel: false } });
+  }
+
+  async updateRunRecord(payload) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/run/updateRecord", payload));
+    }
+    return delay({ statusCode: 1, obj: { remark: "模拟通过", exerciseStatus: "normal" } });
+  }
+
+  async updateRunFiles(payload) {
+    if (this.api.isRealMode()) {
+      return normalizeApiResult(await this.api.post("/tyapi/mobile/run/updateFiles", payload));
+    }
+    return delay({ statusCode: 1, obj: null });
+  }
+
   async startSession(session) {
     if (!this.api.isRealMode()) return delay({ statusCode: 1, message: "开始成功" });
     const result = normalizeApiResult(await this.api.post("/tyapi/mobile/exerciseRecord/startExercise", {

@@ -1,0 +1,108 @@
+.debug-float {
+  position: fixed;
+  right: 14px;
+  bottom: 86px;
+  z-index: 50;
+  font-family: Arial, "Microsoft YaHei", sans-serif;
+}
+
+.debug-float button {
+  font: inherit;
+}
+
+.debug-trigger {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: #fff;
+  background: #222f2b;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .22);
+}
+
+.debug-panel {
+  position: absolute;
+  right: 0;
+  bottom: 56px;
+  width: min(326px, calc(100vw - 28px));
+  max-height: min(620px, calc(100vh - 120px));
+  overflow-y: auto;
+  padding: 14px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .22);
+  display: none;
+}
+
+.debug-float.open .debug-panel {
+  display: block;
+}
+
+.debug-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.debug-head strong {
+  font-size: 15px;
+}
+
+.debug-head span {
+  color: #7d8a85;
+  font-size: 11px;
+}
+
+.debug-field {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 9px;
+}
+
+.debug-field span {
+  color: #53605b;
+  font-size: 12px;
+}
+
+.debug-field input,
+.debug-field textarea,
+.debug-field select {
+  width: 100%;
+  min-height: 34px;
+  border: 1px solid #dce6e1;
+  border-radius: 7px;
+  padding: 7px 9px;
+  font-size: 12px;
+  outline: 0;
+}
+
+.debug-field textarea {
+  min-height: 78px;
+  resize: vertical;
+  font-family: Consolas, monospace;
+}
+
+.debug-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.debug-actions button {
+  height: 34px;
+  border-radius: 17px;
+  color: #fff;
+  background: #1a875f;
+}
+
+.debug-actions .ghost {
+  color: #222f2b;
+  background: #eef3f0;
+}
+
+.debug-note {
+  margin: 8px 0 0;
+  color: #8a9691;
+  font-size: 11px;
+  line-height: 17px;
+}

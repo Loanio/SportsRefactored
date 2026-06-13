@@ -1,6 +1,8 @@
 export const ApiModeKey = "restored.api.mode";
 export const SessionKey = "restored.auth.session";
 export const SchoolKey = "restored.auth.school";
+export const DebugParamsKey = "restored.api.debug.params";
+export const DebugOverrideKey = "restored.api.debug.override";
 
 const DefaultBaseUrl = "http://10.66.22.119:80";
 
@@ -28,7 +30,8 @@ export class ApiClient {
 
   getBaseUrl() {
     const school = this.readJson(SchoolKey);
-    return normalizeBaseUrl(school?.url || school?.configUrl || DefaultBaseUrl);
+    const override = this.readJson(DebugOverrideKey);
+    return normalizeBaseUrl(override?.baseUrl || school?.url || school?.configUrl || DefaultBaseUrl);
   }
 
   async get(path, data = {}, options = {}) {
@@ -48,20 +51,29 @@ export class ApiClient {
     }
 
     const session = this.readJson(SessionKey);
+    const override = this.readJson(DebugOverrideKey);
+    const debugParams = this.getDebugParams();
+    const requestData = method === "GET" ? data : mergeRequestData(data, debugParams);
     const headers = {
-      token: session?.sysToken || session?.token || "",
+      token: override?.token || session?.sysToken || session?.token || "",
       "Content-Type": options.contentType || "application/json",
       ...options.headers
     };
 
+    if (method === "GET" && Object.keys(debugParams).length) {
+      Object.entries(debugParams).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && typeof value !== "object") url.searchParams.set(key, value);
+      });
+    }
+
     if (shouldUseNativeHttp()) {
-      return this.nativeRequest({ method, url: url.toString(), headers, data, options });
+      return this.nativeRequest({ method, url: url.toString(), headers, data: requestData, options });
     }
 
     const response = await fetch(url, {
       method,
       headers,
-      body: method === "GET" ? undefined : JSON.stringify(data || {}),
+      body: method === "GET" ? undefined : JSON.stringify(requestData || {}),
       signal: AbortSignal.timeout(options.timeout || 15000)
     });
 
@@ -105,6 +117,20 @@ export class ApiClient {
       return null;
     }
   }
+
+  getDebugParams() {
+    const all = this.readJson(DebugParamsKey) || {};
+    const page = location.pathname.split("/").pop() || "index.html";
+    const params = all[page] || {};
+    return compactParams({
+      userId: params.userId,
+      eventId: params.eventId,
+      termId: params.termId,
+      clientId: params.clientId,
+      bindId: params.bindId,
+      ...(params.raw || {})
+    });
+  }
 }
 
 export async function aesMinEncrypt(value) {
@@ -145,6 +171,19 @@ function parseNativeData(data) {
     }
   }
   return data || {};
+}
+
+function mergeRequestData(data, params) {
+  const merged = { ...(data || {}) };
+  Object.entries(params).forEach(([key, value]) => {
+    if (key === "userId" && merged.info && typeof merged.info === "object") merged.info.userId = value;
+    else if (!(key in merged)) merged[key] = value;
+  });
+  return merged;
+}
+
+function compactParams(params) {
+  return Object.fromEntries(Object.entries(params).filter(([, value]) => value !== undefined && value !== null && value !== ""));
 }
 
 function base64FromBytes(bytes) {

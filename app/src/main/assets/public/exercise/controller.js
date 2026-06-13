@@ -2,11 +2,13 @@ import { ExerciseKind, SessionStatus, formatDateTime, formatTime, percent } from
 import { ExerciseRepository } from "./repository.js";
 import { ExerciseService } from "./service.js";
 
+const session = readJson("restored.auth.session") || {};
+const debugParams = readJson("restored.api.debug.params")?.["exercise.html"] || {};
 const user = {
-  id: "u-20260001",
-  jobNum: "20260001",
-  bindId: "bind-001",
-  clientId: "mock-client"
+  id: debugParams.userId || session.id || "u-20260001",
+  jobNum: session.jobNum || "20260001",
+  bindId: debugParams.bindId || session.bindId || "bind-001",
+  clientId: debugParams.clientId || session.clientId || "mock-client"
 };
 
 const repository = new ExerciseRepository();
@@ -34,13 +36,49 @@ async function init() {
 function bindStaticEvents() {
   $("#backHome").addEventListener("click", () => location.href = "./index.html");
   $("#notUploadBtn").addEventListener("click", () => switchPanel("local"));
-  $("#recordBtn").addEventListener("click", () => showToast("跳转：/pages/student/exercise/exerciserecord"));
-  $("#historyBtn").addEventListener("click", () => showToast("跳转：/pages/student/exercise/historyexercise"));
-  $("#standardBtn").addEventListener("click", () => showToast("跳转：/pages/student/exercise/standard"));
-  $("#settingBtn").addEventListener("click", () => showToast("跳转：/pages/student/exercise/setting"));
+  $("#recordBtn").addEventListener("click", showRecordCenter);
+  $("#historyBtn").addEventListener("click", showHistorySummary);
+  $("#standardBtn").addEventListener("click", showStandard);
+  $("#settingBtn").addEventListener("click", showRuntimeSetting);
   $("#cancelSession").addEventListener("click", stopActiveSession);
   $("#finishSession").addEventListener("click", finishActiveSession);
   $("#localBack").addEventListener("click", () => switchPanel("dashboard"));
+}
+
+async function showRecordCenter() {
+  try {
+    const result = await service.loadRecordCenter(readDebugParams());
+    showJsonModal("锻炼记录接口", result);
+  } catch (error) {
+    showToast(error.message);
+  }
+}
+
+async function showHistorySummary() {
+  try {
+    const result = await service.loadHistorySummary(readDebugParams());
+    showJsonModal("历史汇总接口", result);
+  } catch (error) {
+    showToast(error.message);
+  }
+}
+
+async function showStandard() {
+  try {
+    const result = await service.loadExerciseStandard(readDebugParams());
+    showJsonModal("考核标准接口", result);
+  } catch (error) {
+    showToast(error.message);
+  }
+}
+
+async function showRuntimeSetting() {
+  try {
+    const result = await service.loadVenueRuntime(readDebugParams());
+    showJsonModal("场地/围栏接口", result);
+  } catch (error) {
+    showToast(error.message);
+  }
 }
 
 async function refresh() {
@@ -327,6 +365,12 @@ function showModal(title, body, actions) {
   $("#modal").classList.remove("hidden");
 }
 
+function showJsonModal(title, data) {
+  showModal(title, `<pre class="json-preview">${escapeHtml(JSON.stringify(data, null, 2))}</pre>`, [
+    ["关闭", "", closeModal]
+  ]);
+}
+
 function closeModal() {
   $("#modal").classList.add("hidden");
 }
@@ -337,4 +381,27 @@ function showToast(text) {
   el.classList.add("show");
   clearTimeout(showToast.timer);
   showToast.timer = setTimeout(() => el.classList.remove("show"), 1800);
+}
+
+function readDebugParams() {
+  const page = readJson("restored.api.debug.params")?.["exercise.html"] || {};
+  return { ...page, ...(page.raw || {}) };
+}
+
+function readJson(key) {
+  try {
+    return JSON.parse(localStorage.getItem(key) || "null");
+  } catch {
+    return null;
+  }
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[char]);
 }

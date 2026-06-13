@@ -385,3 +385,15 @@
   opacity: .5;
   pointer-events: none;
 }
+
+.json-preview {
+  max-height: 360px;
+  overflow: auto;
+  padding: 10px;
+  border-radius: 8px;
+  color: #24312d;
+  background: #f4f7f5;
+  font-size: 11px;
+  line-height: 17px;
+  white-space: pre-wrap;
+}

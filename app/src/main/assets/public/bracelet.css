@@ -1,0 +1,160 @@
+.bracelet-app {
+  background: #f5f8f6;
+}
+
+.bracelet-top {
+  min-height: 112px;
+  padding: 28px 18px 14px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  background: #1a875f;
+}
+
+.bracelet-top h1,
+.bracelet-top p {
+  margin: 0;
+  text-align: center;
+}
+
+.bracelet-top h1 {
+  font-size: 20px;
+}
+
+.bracelet-top p {
+  margin-top: 4px;
+  font-size: 12px;
+  opacity: .86;
+}
+
+.bracelet-top span {
+  color: #fff;
+  font-size: 24px;
+}
+
+.bracelet-card,
+.bracelet-actions,
+.bracelet-list {
+  margin: 16px;
+}
+
+.bracelet-card {
+  padding: 18px;
+  border-radius: 8px;
+  color: #fff;
+  background: #24312d;
+}
+
+.bracelet-card strong,
+.bracelet-card span {
+  display: block;
+}
+
+.bracelet-card strong {
+  font-size: 22px;
+}
+
+.bracelet-card span {
+  margin-top: 8px;
+  opacity: .82;
+  font-size: 13px;
+}
+
+.bracelet-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.bracelet-actions button {
+  min-height: 42px;
+  border-radius: 21px;
+  color: #fff;
+  background: #1a875f;
+}
+
+.bracelet-actions .danger {
+  background: #e5605a;
+}
+
+.bracelet-actions .ghost {
+  color: #222f2b;
+  background: #eef3f0;
+}
+
+.bracelet-list {
+  padding-bottom: 24px;
+}
+
+.bracelet-row {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(45, 79, 65, .07);
+}
+
+.bracelet-row strong,
+.bracelet-row span {
+  display: block;
+}
+
+.bracelet-row span {
+  margin-top: 4px;
+  color: #7d8a85;
+  font-size: 12px;
+}
+
+.bracelet-row b {
+  color: #1a875f;
+  font-size: 13px;
+}
+
+.json-preview {
+  max-height: 360px;
+  overflow: auto;
+  padding: 10px;
+  border-radius: 8px;
+  color: #24312d;
+  background: #f4f7f5;
+  font-size: 11px;
+  line-height: 17px;
+  white-space: pre-wrap;
+}
+
+.empty-box {
+  margin-top: 10px;
+  padding: 24px;
+  text-align: center;
+  color: #7d8a85;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.modal-field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.modal-field span {
+  color: #53605b;
+  font-size: 12px;
+}
+
+.modal-field input {
+  width: 100%;
+  height: 38px;
+  border: 1px solid #dce6e1;
+  border-radius: 8px;
+  padding: 0 10px;
+  outline: 0;
+}

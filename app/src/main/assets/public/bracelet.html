@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>我的手环还原</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./bracelet.css">
+  <link rel="stylesheet" href="./debug-tools.css">
+</head>
+<body>
+  <main class="phone-shell">
+    <section class="app bracelet-app">
+      <header class="bracelet-top">
+        <button class="icon-button" id="backHome"><span>‹</span></button>
+        <div>
+          <h1>我的手环</h1>
+          <p>配对 / 同步 / 解绑</p>
+        </div>
+        <button class="icon-button" id="refreshBtn"><span>↻</span></button>
+      </header>
+
+      <section class="bracelet-card" id="braceletCard"></section>
+
+      <section class="bracelet-actions">
+        <button id="searchBtn">搜索手环</button>
+        <button id="manualBindBtn">手动绑定</button>
+        <button id="syncBtn">同步心率/睡眠</button>
+        <button id="reportBtn">查看健康数据</button>
+        <button class="danger" id="unbindBtn">解绑手环</button>
+        <button class="ghost" id="feedbackBtn">填写反馈</button>
+      </section>
+
+      <section class="bracelet-list">
+        <div class="section-title">
+          <span>搜索结果</span>
+          <small>对齐 searchBracelet</small>
+        </div>
+        <div id="searchList"></div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-card">
+      <h2 id="modalTitle"></h2>
+      <div id="modalBody"></div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script type="module" src="./bracelet/controller.js"></script>
+  <script src="./debug-tools.js"></script>
+</body>
+</html>

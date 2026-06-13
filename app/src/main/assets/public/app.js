@@ -196,6 +196,10 @@ function renderModules() {
         location.href = "./exercise.html";
         return;
       }
+      if (btn.dataset.code === "STUDENT_BRACELET") {
+        location.href = "./bracelet.html";
+        return;
+      }
       toast(`跳转：${btn.dataset.path}`);
     });
   });

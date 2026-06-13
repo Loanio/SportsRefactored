@@ -221,9 +221,13 @@ function normalizeSchool(item) {
 }
 
 function getSystemInfo(system) {
+  const ua = navigator.userAgent || "";
+  const androidVersion = ua.match(/Android\s+([^;]+)/i)?.[1]?.trim();
+  const androidModel = ua.match(/Android\s+[^;]+;\s*([^;]+?)\s+Build/i)?.[1]?.trim();
+
   return {
-    system: navigator.userAgent || system,
-    brand: navigator.platform || "browser"
+    system: androidVersion ? `Android ${androidVersion}` : system,
+    brand: androidModel || system
   };
 }
 

@@ -1,0 +1,387 @@
+.exercise-app {
+  background: #f5f8f6;
+}
+
+.exercise-top {
+  min-height: 112px;
+  padding: 28px 18px 14px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  background: linear-gradient(180deg, #16885f, #1a875f);
+}
+
+.exercise-top h1 {
+  margin: 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+.exercise-top p {
+  margin: 4px 0 0;
+  text-align: center;
+  font-size: 12px;
+  opacity: .86;
+}
+
+.exercise-top .icon-button span {
+  color: #fff;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.exercise-top .icon-button.danger {
+  background: #e5605a;
+}
+
+.exercise-panel {
+  display: none;
+  height: calc(100% - 112px);
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.exercise-panel.active {
+  display: block;
+}
+
+.summary-band {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.summary-band div,
+.tips-card,
+.target-card,
+.session-card,
+.local-record {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(45, 79, 65, .07);
+}
+
+.summary-band div {
+  padding: 14px;
+}
+
+.summary-band span,
+.progress-row span,
+.local-record small {
+  color: #7d8a85;
+  font-size: 12px;
+}
+
+.summary-band strong {
+  display: block;
+  margin-top: 6px;
+  color: #1a875f;
+  font-size: 24px;
+}
+
+.sport-section,
+.target-section,
+.tips-card {
+  margin-top: 16px;
+}
+
+.sport-scroll {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 86px;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.sport-card {
+  position: relative;
+  min-height: 102px;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 10px 8px;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 6px;
+  color: #fff;
+  background: var(--sport-color);
+  box-shadow: 0 8px 20px rgba(45, 79, 65, .12);
+}
+
+.sport-card img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.sport-card strong,
+.sport-card small {
+  z-index: 1;
+}
+
+.sport-card strong {
+  font-size: 13px;
+}
+
+.sport-card small {
+  opacity: .85;
+  font-size: 11px;
+}
+
+.sport-glow {
+  position: absolute;
+  right: -18px;
+  top: -18px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .18);
+}
+
+.quick-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.quick-grid button {
+  min-height: 74px;
+  background: #fff;
+  border-radius: 8px;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 7px;
+  box-shadow: 0 2px 8px rgba(45, 79, 65, .06);
+}
+
+.quick-grid img {
+  width: 26px;
+  height: 26px;
+}
+
+.quick-grid span {
+  font-size: 12px;
+}
+
+.target-card {
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.target-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.target-head strong {
+  color: #1a875f;
+}
+
+.target-head span {
+  color: #e5605a;
+  font-size: 12px;
+}
+
+.progress-row {
+  margin-top: 12px;
+}
+
+.progress-row div:first-child {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.progress-row b {
+  font-size: 13px;
+}
+
+.progress {
+  height: 10px;
+  border-radius: 5px;
+  background: #e8e8e8;
+  overflow: hidden;
+}
+
+.progress i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #1a875f;
+}
+
+.tips-card {
+  padding: 14px;
+}
+
+.tips-card ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: #4d5a55;
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.session-panel {
+  display: none;
+  place-items: center;
+}
+
+.session-panel.active {
+  display: grid;
+  align-content: center;
+}
+
+.session-card {
+  width: 100%;
+  padding: 28px 18px;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.session-card img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.session-card h2 {
+  margin: 14px 0 4px;
+}
+
+.session-card p {
+  margin: 0;
+  color: #7d8a85;
+}
+
+.session-card strong {
+  margin-top: 20px;
+  font-size: 42px;
+  color: #1a875f;
+}
+
+.session-card span {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #222f2b;
+}
+
+.session-card small {
+  margin-top: 12px;
+  color: #7d8a85;
+  line-height: 20px;
+}
+
+.session-actions {
+  width: 100%;
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.session-actions button,
+.record-actions button {
+  height: 40px;
+  border-radius: 20px;
+  background: #1a875f;
+  color: #fff;
+}
+
+.session-actions .secondary,
+.record-actions .ghost {
+  background: #eef3f0;
+  color: #222f2b;
+}
+
+.local-title {
+  margin: 16px 0 8px;
+  font-size: 15px;
+}
+
+.local-record {
+  padding: 12px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.local-record strong,
+.local-record p,
+.local-record small {
+  display: block;
+}
+
+.local-record p {
+  margin: 5px 0;
+  color: #7d8a85;
+  font-size: 13px;
+}
+
+.record-actions {
+  display: grid;
+  gap: 6px;
+}
+
+.record-actions button {
+  height: 28px;
+  min-width: 56px;
+  font-size: 12px;
+}
+
+.empty-box {
+  padding: 24px;
+  text-align: center;
+  color: #7d8a85;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.place-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.place-option {
+  padding: 12px;
+  border-radius: 8px;
+  text-align: left;
+  background: #f4f7f5;
+  border: 1px solid transparent;
+}
+
+.place-option.active {
+  border-color: #1a875f;
+  background: #e6f2ed;
+}
+
+.place-option strong,
+.place-option span {
+  display: block;
+}
+
+.place-option span {
+  margin-top: 4px;
+  color: #7d8a85;
+  font-size: 12px;
+}
+
+.countdown {
+  color: #7d8a85;
+}
+
+.modal-actions button.disabled {
+  opacity: .5;
+  pointer-events: none;
+}

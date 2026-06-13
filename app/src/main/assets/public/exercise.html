@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>课外锻炼业务还原</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./exercise.css">
+</head>
+<body>
+  <main class="phone-shell">
+    <section class="app exercise-app">
+      <header class="exercise-top">
+        <button class="icon-button" id="backHome" title="返回首页">
+          <span>‹</span>
+        </button>
+        <div>
+          <h1>课外锻炼</h1>
+          <p>业务逻辑还原版</p>
+        </div>
+        <button class="icon-button" id="notUploadBtn" title="未上传">
+          <span id="localCount">0</span>
+        </button>
+      </header>
+
+      <section class="exercise-panel active" data-panel="dashboard">
+        <section class="summary-band">
+          <div>
+            <span>本学期次数</span>
+            <strong id="runCount">0</strong>
+          </div>
+          <div>
+            <span>有效里程</span>
+            <strong id="runDistance">0km</strong>
+          </div>
+        </section>
+
+        <section class="sport-section">
+          <div class="section-title">
+            <span>选择锻炼项目</span>
+            <small>跑步 / 其他运动</small>
+          </div>
+          <div class="sport-scroll" id="eventList"></div>
+        </section>
+
+        <section class="quick-grid">
+          <button id="recordBtn"><img src="./static/img/index/Rocket.svg" alt=""><span>锻炼记录</span></button>
+          <button id="historyBtn"><img src="./static/img/index/Calendar.svg" alt=""><span>历史汇总</span></button>
+          <button id="standardBtn"><img src="./static/img/index/Ruler.svg" alt=""><span>考核标准</span></button>
+          <button id="settingBtn"><img src="./static/img/index/Settings.svg" alt=""><span>系统设置</span></button>
+        </section>
+
+        <section class="target-section">
+          <div class="section-title">
+            <span>目标进度</span>
+            <small>学期统计</small>
+          </div>
+          <div id="targetList"></div>
+        </section>
+
+        <section class="tips-card">
+          <strong>锻炼提示</strong>
+          <ul id="tipsList"></ul>
+        </section>
+      </section>
+
+      <section class="exercise-panel session-panel" data-panel="session">
+        <div class="session-card">
+          <img id="sessionIcon" src="./static/img/ball/run.png" alt="">
+          <h2 id="sessionTitle">跑步</h2>
+          <p id="sessionPlace">北区田径场</p>
+          <strong id="sessionTime">0:00</strong>
+          <span id="sessionMode">GPS跑步模式</span>
+          <small id="sessionHint"></small>
+        </div>
+        <div class="session-actions">
+          <button id="cancelSession" class="secondary">放弃</button>
+          <button id="finishSession">结束并保存</button>
+        </div>
+      </section>
+
+      <section class="exercise-panel local-panel" data-panel="local">
+        <div class="sub-header">
+          <h1>本地待上传</h1>
+          <button id="localBack">返回</button>
+        </div>
+        <h2 class="local-title">跑步数据</h2>
+        <div id="runLocalList"></div>
+        <h2 class="local-title">其他运动</h2>
+        <div id="otherLocalList"></div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-card">
+      <h2 id="modalTitle"></h2>
+      <div id="modalBody"></div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script type="module" src="./exercise/controller.js"></script>
+</body>
+</html>

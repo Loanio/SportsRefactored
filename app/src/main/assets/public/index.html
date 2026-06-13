@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>数智体育-首页还原</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="phone-shell">
+    <section class="app" id="app">
+      <header class="top-bar">
+        <button class="icon-button" id="scanBtn" title="扫一扫">
+          <img src="./static/img/index/qrcode.svg" alt="">
+        </button>
+        <div class="school-block">
+          <div class="school-name" id="schoolName">数智体育</div>
+          <div class="role-line">
+            <button class="role-pill active" data-role="学生">学生端</button>
+            <button class="role-pill" data-role="教师">教师端</button>
+          </div>
+        </div>
+        <button class="avatar-button" id="homePageBtn" title="个人主页">
+          <img id="avatar" src="./static/img/index/ProfileS.svg" alt="">
+        </button>
+      </header>
+
+      <section class="page page-home active" data-page="home">
+        <div class="carousel" id="carousel">
+          <div class="carousel-track" id="carouselTrack"></div>
+          <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+
+        <section class="notice-strip" id="noticeStrip">
+          <img src="./static/img/index/Messages.svg" alt="">
+          <div>
+            <strong id="noticeTitle">通知公告</strong>
+            <span id="noticeText">加载中...</span>
+          </div>
+          <button id="noticeOpenBtn">查看</button>
+        </section>
+
+        <section class="module-section">
+          <div class="section-title">
+            <span>应用模块</span>
+            <small id="moduleCount"></small>
+          </div>
+          <div class="module-grid" id="moduleGrid"></div>
+        </section>
+
+        <section class="continue-card" id="continueCard">
+          <div>
+            <span class="tag">未完成</span>
+            <strong>检测到一条未结束运动</strong>
+            <p id="continueInfo">户外跑步 2.31km，是否继续？</p>
+          </div>
+          <button id="continueBtn">继续运动</button>
+        </section>
+      </section>
+
+      <section class="page page-message" data-page="message">
+        <div class="sub-header">
+          <h1>消息</h1>
+          <button id="readAllBtn">全部已读</button>
+        </div>
+        <div class="message-list" id="messageList"></div>
+      </section>
+
+      <section class="page page-circle" data-page="circle">
+        <div class="sub-header">
+          <h1>运动圈</h1>
+          <button id="publishBtn">发布</button>
+        </div>
+        <div class="feed-list" id="feedList"></div>
+      </section>
+
+      <section class="page page-mine" data-page="mine">
+        <div class="profile-card">
+          <img id="mineAvatar" src="./static/img/index/ProfileS.svg" alt="">
+          <div>
+            <h1 id="userName">王同学</h1>
+            <p id="userMeta">学号 20260001 · 数智体育学院</p>
+          </div>
+        </div>
+        <div class="setting-list" id="settingList"></div>
+      </section>
+
+      <nav class="bottom-bar">
+        <button class="tab active" data-target="home">
+          <img src="./static/img/bottom-home.svg" alt="">
+          <span>首页</span>
+        </button>
+        <button class="tab" data-target="message">
+          <span class="badge" id="msgBadge">3</span>
+          <img src="./static/img/bottom-msg.svg" alt="">
+          <span>消息</span>
+        </button>
+        <button class="tab" data-target="circle">
+          <img src="./static/img/Chat.svg" alt="">
+          <span>运动圈</span>
+        </button>
+        <button class="tab" data-target="mine">
+          <img src="./static/img/bottom-user.svg" alt="">
+          <span>我的</span>
+        </button>
+      </nav>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-card">
+      <h2 id="modalTitle"></h2>
+      <div id="modalBody"></div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+	"appId": "com.restored.sports",
+	"appName": "数智体育还原",
+	"webDir": "restored-home",
+	"bundledWebRuntime": false,
+	"server": {
+		"androidScheme": "https"
+	},
+	"plugins": {
+		"CapacitorHttp": {
+			"enabled": true
+		}
+	}
+}

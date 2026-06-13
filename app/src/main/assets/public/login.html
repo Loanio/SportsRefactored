@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>数智体育-登录还原</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./login.css">
+</head>
+<body>
+  <main class="phone-shell">
+    <section class="app login-app">
+      <div class="login-bg"></div>
+      <section class="auth-view active" data-view="login">
+        <header class="login-head">
+          <img id="schoolLogo" src="./static/img/login/logo.png" alt="">
+          <h1>数智体育</h1>
+          <button id="schoolBtn">
+            <span id="schoolName">请选择学校</span>
+            <b>切换</b>
+          </button>
+        </header>
+
+        <form class="auth-form" id="loginForm">
+          <label>
+            <span>登录账号</span>
+            <input name="loginId" autocomplete="username" placeholder="student / teacher / init">
+          </label>
+          <label>
+            <span>登录密码</span>
+            <div class="password-row">
+              <input name="password" type="password" data-password="true" autocomplete="current-password" placeholder="123456">
+              <button type="button" id="showPwdBtn">显示</button>
+            </div>
+          </label>
+          <label class="check-row">
+            <input id="accepted" type="checkbox">
+            <span>已阅读并同意</span>
+            <button type="button" id="agreementUser">用户协议</button>
+            <span>和</span>
+            <button type="button" id="agreementPrivacy">隐私政策</button>
+          </label>
+          <label class="api-row">
+            <span>接口模式</span>
+            <button type="button" id="apiModeBtn" aria-pressed="false">
+              <i></i>
+              <b id="apiModeText">还原数据</b>
+            </button>
+          </label>
+          <p class="api-url" id="apiUrl"></p>
+          <button class="primary" id="loginSubmit" type="submit">登录</button>
+        </form>
+
+        <div class="login-links">
+          <button id="goRegister">注册账号</button>
+          <button id="goFind">忘记密码</button>
+        </div>
+      </section>
+
+      <section class="auth-view" data-view="school">
+        <header class="sub-login-head">
+          <button id="schoolBack">‹</button>
+          <h1>选择学校</h1>
+        </header>
+        <div class="school-list" id="schoolList"></div>
+      </section>
+
+      <section class="auth-view" data-view="register">
+        <header class="sub-login-head">
+          <button data-back-login>‹</button>
+          <h1>注册账号</h1>
+        </header>
+        <form class="auth-form" id="registerForm">
+          <label><span>姓名</span><input name="name" placeholder="请输入姓名"></label>
+          <label><span>手机号</span><input name="mobile" placeholder="请输入手机号"></label>
+          <label><span>密码</span><input name="password" type="password" data-password="true" placeholder="至少6位"></label>
+          <label><span>确认密码</span><input name="confirmPassword" type="password" data-password="true" placeholder="再次输入"></label>
+          <button class="primary" type="submit">注册</button>
+        </form>
+      </section>
+
+      <section class="auth-view" data-view="find-password">
+        <header class="sub-login-head">
+          <button data-back-login>‹</button>
+          <h1>找回密码</h1>
+        </header>
+        <form class="auth-form" id="findForm">
+          <label><span>姓名</span><input name="name" placeholder="注册姓名"></label>
+          <label><span>手机号</span><input name="mobile" placeholder="注册手机号"></label>
+          <label><span>登录账号</span><input name="loginId" placeholder="登录账号"></label>
+          <label><span>新密码</span><input name="password" type="password" data-password="true" placeholder="至少6位"></label>
+          <label><span>确认新密码</span><input name="confirmPassword" type="password" data-password="true" placeholder="再次输入"></label>
+          <button class="primary" type="submit">确认修改</button>
+        </form>
+      </section>
+
+      <section class="auth-view" data-view="change-password">
+        <header class="sub-login-head">
+          <button data-back-login>‹</button>
+          <h1>修改密码</h1>
+        </header>
+        <p class="password-tip">为了您的数据安全，请修改原始密码。</p>
+        <form class="auth-form" id="changeForm">
+          <label><span>旧密码</span><input name="oldPassword" type="password" data-password="true" placeholder="请输入旧密码"></label>
+          <label><span>新密码</span><input id="changePassword" name="password" type="password" data-password="true" placeholder="至少8位，包含多种字符"></label>
+          <div class="strength">
+            <i id="strengthBar" data-level="弱"></i>
+            <span>强度：<b id="strengthText">弱</b></span>
+          </div>
+          <label><span>确认新密码</span><input name="confirmPassword" type="password" data-password="true" placeholder="再次输入"></label>
+          <button class="primary" type="submit">保存密码</button>
+        </form>
+      </section>
+
+      <div class="error-box" id="errorBox"></div>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-card">
+      <h2 id="modalTitle"></h2>
+      <div id="modalBody"></div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script type="module" src="./auth/controller.js"></script>
+</body>
+</html>

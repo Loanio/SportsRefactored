@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">数智体育还原</string>
-    <string name="title_activity_main">数智体育还原</string>
+    <string name="app_name">树脂踢鱼</string>
+    <string name="title_activity_main">树脂踢鱼</string>
     <string name="package_name">com.restored.sports</string>
     <string name="custom_url_scheme">com.restored.sports</string>
 </resources>

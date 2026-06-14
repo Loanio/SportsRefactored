@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>教学管理还原</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./teacher-manage.css">
+  <link rel="stylesheet" href="./debug-tools.css">
+</head>
+<body>
+  <main class="phone-shell">
+    <section class="app teacher-app">
+      <header class="teacher-top">
+        <button class="icon-button" id="backHome"><span>‹</span></button>
+        <div>
+          <h1>教学管理</h1>
+          <p id="teacherName">教师端</p>
+        </div>
+        <button class="icon-button" id="moreBtn"><span>⋯</span></button>
+      </header>
+
+      <section class="teacher-panel active" data-panel="home">
+        <label class="term-select">
+          <span>学期</span>
+          <select id="termSelect"></select>
+        </label>
+
+        <section class="manage-actions">
+          <button id="courseListBtn"><img src="./static/img/index/Folder.svg" alt=""><span>课程列表</span></button>
+          <button id="refreshBtn"><img src="./static/img/index/Settings.svg" alt=""><span>刷新数据</span></button>
+        </section>
+
+        <section class="class-section">
+          <div class="section-title">
+            <span>我的教学班</span>
+            <small id="classCount">0 个</small>
+          </div>
+          <div id="classList"></div>
+        </section>
+      </section>
+
+      <section class="teacher-panel class-panel" data-panel="class">
+        <div class="class-head-card" id="classHead"></div>
+        <section class="module-row" id="classModules"></section>
+        <section class="summary-grid" id="classSummary"></section>
+        <section class="teacher-tabs">
+          <button class="active" data-tab="students">学生</button>
+          <button data-tab="attendance">考勤</button>
+          <button data-tab="grades">成绩</button>
+          <button data-tab="analysis">分析</button>
+        </section>
+        <div id="tabBody"></div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-card">
+      <h2 id="modalTitle"></h2>
+      <div id="modalBody"></div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script type="module" src="./teacher/controller.js"></script>
+  <script src="./debug-tools.js"></script>
+</body>
+</html>

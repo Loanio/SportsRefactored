@@ -200,6 +200,10 @@ function renderModules() {
         location.href = "./bracelet.html";
         return;
       }
+      if (btn.dataset.code === "TEACHER_COURSE") {
+        location.href = "./teacher-manage.html";
+        return;
+      }
       toast(`跳转：${btn.dataset.path}`);
     });
   });

@@ -50,9 +50,17 @@ export class ExerciseService {
 
   async startSession(event, place) {
     const session = createSession({ event, place, user: this.user, startedAt: nowIso() });
-    await this.repository.startSession?.(session);
     await this.repository.saveLocalSession(session);
-    return session;
+    try {
+      const result = await this.repository.startSession?.(session);
+      const synced = { ...session, serverStartResult: result?.raw || result || null };
+      await this.repository.saveLocalSession(synced);
+      return synced;
+    } catch (error) {
+      const fallback = { ...session, serverStartError: error.message || "开始锻炼接口失败" };
+      await this.repository.saveLocalSession(fallback);
+      return fallback;
+    }
   }
 
   async finishCurrentSession(session, metrics) {

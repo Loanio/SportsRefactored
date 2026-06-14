@@ -377,15 +377,6 @@
   font-size: 12px;
 }
 
-.countdown {
-  color: #7d8a85;
-}
-
-.modal-actions button.disabled {
-  opacity: .5;
-  pointer-events: none;
-}
-
 .json-preview {
   max-height: 360px;
   overflow: auto;

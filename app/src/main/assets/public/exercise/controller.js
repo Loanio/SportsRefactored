@@ -19,7 +19,7 @@ const state = {
   selectedEvent: null,
   selectedPlace: null,
   activeSession: null,
-  panel: "dashboard",
+  panel: location.hash.replace("#", "") || "dashboard",
   elapsedTimer: null
 };
 
@@ -144,10 +144,11 @@ async function chooseEvent(eventId) {
 }
 
 function showPlacePicker(event, places) {
+  const safePlaces = places.length ? places : [defaultPlace(event)];
   showModal("选择锻炼场地", `
     <p>${event.run ? "跑步项目将进入地图运动页。" : "非跑步项目将进入计时运动页。"}</p>
     <div class="place-list">
-      ${places.map((place, index) => `
+      ${safePlaces.map((place, index) => `
         <button class="place-option ${index === 0 ? "active" : ""}" data-id="${place.id}">
           <strong>${place.name}</strong>
           <span>${place.venueId}</span>
@@ -158,10 +159,10 @@ function showPlacePicker(event, places) {
     ["重选", "secondary", closeModal],
     ["确定", "", async () => {
       const active = $(".place-option.active") || $(".place-option");
-      const place = places.find(item => item.id === active.dataset.id);
+      const place = safePlaces.find(item => item.id === active.dataset.id) || safePlaces[0];
       state.selectedPlace = place;
       closeModal();
-      await showInstructionThenStart(event, place);
+      await startSession(event, place);
     }]
   ]);
 
@@ -173,44 +174,13 @@ function showPlacePicker(event, places) {
   });
 }
 
-async function showInstructionThenStart(event, place) {
-  const { instructions } = state.dashboard;
-  if (!instructions.open) {
-    await startSession(event, place);
-    return;
-  }
-
-  let countdown = 5;
-  showModal("锻炼须知", `
-    <p>${instructions.article}</p>
-    <p class="countdown">请阅读 <b id="readCount">${countdown}</b> 秒后开始</p>
-  `, [
-    ["取消", "secondary", closeModal],
-    ["开始锻炼", "disabled", () => {}]
-  ]);
-
-  const action = $("#modalActions button:last-child");
-  const timer = setInterval(async () => {
-    countdown -= 1;
-    const el = $("#readCount");
-    if (el) el.textContent = countdown;
-    if (countdown <= 0) {
-      clearInterval(timer);
-      action.classList.remove("disabled");
-      action.onclick = async () => {
-        closeModal();
-        await startSession(event, place);
-      };
-    }
-  }, 1000);
-}
-
 async function startSession(event, place) {
-  state.activeSession = await service.startSession(event, place);
-  state.panel = "session";
-  switchPanel("session");
-  startElapsedTimer();
-  showToast(event.kind === ExerciseKind.RUN ? "已进入跑步记录模拟" : "已进入计时运动模拟");
+  try {
+    state.activeSession = await service.startSession(event, place || defaultPlace(event));
+    location.assign(buildSessionUrl(state.activeSession));
+  } catch (error) {
+    showToast(error.message || "开始锻炼失败");
+  }
 }
 
 function startElapsedTimer() {
@@ -325,12 +295,7 @@ async function continueRecord(kind, id) {
     await refresh();
     return;
   }
-  state.activeSession = continued;
-  state.selectedEvent = state.dashboard.events.find(event => event.id === continued.eventId) || {
-    icon: "./static/img/ball/run.png"
-  };
-  switchPanel("session");
-  startElapsedTimer();
+  location.href = buildSessionUrl(continued);
 }
 
 async function deleteRecord(kind, id) {
@@ -381,6 +346,32 @@ function showToast(text) {
   el.classList.add("show");
   clearTimeout(showToast.timer);
   showToast.timer = setTimeout(() => el.classList.remove("show"), 1800);
+}
+
+function buildSessionUrl(session) {
+  const page = session.kind === ExerciseKind.RUN ? "run-exercise.html" : "other-exercise.html";
+  const query = new URLSearchParams({
+    id: session.id,
+    kind: session.kind,
+    eventId: session.eventId,
+    eventName: session.eventName,
+    placeName: session.placeName,
+    venueId: session.venueId || "",
+    exerciseLocationId: session.exerciseLocationId || ""
+  });
+  const url = `./${page}?${query.toString()}`;
+  sessionStorage.setItem("restored.exercise.lastNavigation", url);
+  return url;
+}
+
+function defaultPlace(event) {
+  return {
+    id: `${event.id}-default`,
+    name: "默认运动场地",
+    venueId: "",
+    exerciseEventId: event.id,
+    centralPoint: ""
+  };
 }
 
 function readDebugParams() {

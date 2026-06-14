@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>跑步锻炼</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./runtime-exercise.css">
+  <link rel="stylesheet" href="./debug-tools.css">
+</head>
+<body>
+  <main class="phone-shell">
+    <section class="app runtime-app">
+      <header class="runtime-top">
+        <button class="icon-button" id="backBtn"><span>‹</span></button>
+        <div>
+          <h1 id="runtimeTitle">跑步</h1>
+          <p id="runtimePlace">运动场地</p>
+        </div>
+        <span id="runtimeMode">GPS跑步</span>
+      </header>
+
+      <section class="runtime-map" aria-label="高德地图区域">
+        <div id="mapTiles" class="map-tiles"></div>
+        <svg id="mapSvg" viewBox="0 0 1000 700" preserveAspectRatio="none"></svg>
+        <div class="map-scale" id="mapScale">高德路网瓦片</div>
+        <div class="map-status" id="mapStatus">等待 GPS 定位</div>
+        <button id="nativeMapBtn" class="native-map-btn">原生高德</button>
+      </section>
+      <section class="runtime-card">
+        <strong id="runtimeTime">0:00</strong>
+        <span id="runtimeMetric">0 km</span>
+      </section>
+      <section class="runtime-actions">
+        <button class="ghost" id="pauseBtn">暂停</button>
+        <button id="finishBtn">结束锻炼</button>
+      </section>
+      <section class="runtime-api">
+        <strong>地图/围栏接口返回</strong>
+        <pre id="runtimeApi">{}</pre>
+      </section>
+    </section>
+  </main>
+  <div class="toast" id="toast"></div>
+  <script type="module" src="./exercise/runtime.js"></script>
+  <script src="./debug-tools.js"></script>
+</body>
+</html>

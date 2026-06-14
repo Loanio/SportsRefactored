@@ -32,6 +32,7 @@ export function createSession({ event, place, user, startedAt = nowIso() }) {
     placeName: place?.name || "未选择场地",
     venueId: place?.venueId || "",
     exerciseLocationId: place?.id || "",
+    centralPoint: place?.centralPoint || "",
     startTime: startedAt,
     endTime: startedAt,
     heartRate: [],

@@ -1,0 +1,174 @@
+.runtime-app {
+  background: #f5f8f6;
+}
+
+.runtime-top {
+  min-height: 112px;
+  padding: 28px 18px 14px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  background: #1a875f;
+}
+
+.runtime-top h1,
+.runtime-top p {
+  margin: 0;
+  text-align: center;
+}
+
+.runtime-top h1 {
+  font-size: 20px;
+}
+
+.runtime-top p {
+  margin-top: 4px;
+  font-size: 12px;
+  opacity: .86;
+}
+
+.runtime-top span {
+  color: #fff;
+  font-size: 24px;
+}
+
+.runtime-map {
+  height: 270px;
+  margin: 16px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  background: #dfe6df;
+}
+
+.runtime-map-compact {
+  height: 156px;
+}
+
+.map-tiles {
+  position: absolute;
+  inset: 0;
+  background: #dfe6df;
+}
+
+.map-tile {
+  position: absolute;
+  width: 256px;
+  height: 256px;
+  object-fit: cover;
+}
+
+.runtime-map svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.map-scale {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 3;
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: #53605b;
+  background: rgba(255,255,255,.9);
+  font-size: 11px;
+}
+
+.map-status {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 3;
+  max-width: calc(100% - 132px);
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #24342e;
+  background: rgba(255,255,255,.92);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.runtime-map .native-map-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 3;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 16px;
+  color: #1a875f;
+  background: rgba(255,255,255,.92);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.runtime-card {
+  margin: 16px;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(45, 79, 65, .07);
+}
+
+.runtime-card strong {
+  display: block;
+  color: #1a875f;
+  font-size: 48px;
+}
+
+.runtime-card span {
+  display: block;
+  margin-top: 8px;
+  color: #7d8a85;
+}
+
+.runtime-actions {
+  margin: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.runtime-actions button {
+  height: 42px;
+  border-radius: 21px;
+  color: #fff;
+  background: #1a875f;
+}
+
+.runtime-actions .ghost {
+  color: #222f2b;
+  background: #eef3f0;
+}
+
+.runtime-api {
+  margin: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.runtime-api strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.runtime-api pre {
+  max-height: 160px;
+  overflow: auto;
+  margin: 0;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f4f7f5;
+  font-size: 11px;
+  line-height: 17px;
+  white-space: pre-wrap;
+}

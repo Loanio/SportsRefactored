@@ -28,6 +28,10 @@
           <input id="debugToken" placeholder="默认取当前登录 token">
         </label>
         <label class="debug-field">
+          <span>当前 WebView UA</span>
+          <textarea id="debugUa" spellcheck="false" readonly></textarea>
+        </label>
+        <label class="debug-field">
           <span>userId</span>
           <input id="debugUserId">
         </label>
@@ -71,6 +75,7 @@
     const pageParams = state.params[state.page] || {};
     $("#debugBaseUrl").value = state.override.baseUrl || "";
     $("#debugToken").value = state.override.token || "";
+    $("#debugUa").value = navigator.userAgent || "";
     $("#debugUserId").value = pageParams.userId || "";
     $("#debugEventId").value = pageParams.eventId || "";
     $("#debugTermId").value = pageParams.termId || "";
